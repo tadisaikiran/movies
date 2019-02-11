@@ -1,0 +1,43 @@
+<div class="container pad-top-5">
+  <h3 class="align-center">Movies List</h3>
+  <div *ngIf="!movieDetail">
+    <div class="form-group col-xs-6">
+      <div class='col-xs-6'><input type="text" class="form-control" placeholder="Search by Title" value='{{searchVal}}' #searchValue ></div>
+      <div class='col-xs-6'><button class="btn btn-primary" (click)="getMovieList(searchValue.value)">Search</button></div>
+    </div>
+  </div>
+  <div class="col-12" *ngIf="!movieDetail && movieList && movieList.length > 0">
+    <div class="col-xs-12 p-0">
+      <div class="table-responsive">
+        <table class="table table-hover custom-table">
+          <thead id="tHead">
+            <tr>
+              <th>Title</th>
+              <th> Year</th>
+              <th> ImdbID</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="movieList">
+            <tr (click)="goToMoviedetails(movie)" *ngFor="let movie of movieList">
+              <td class="ellipsis">{{movie.Title}}</td>
+              <td>{{movie.Year}}</td>
+              <td>{{movie.imdbID}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-12" style='left: 15px' *ngIf="errMsg">{{errMsg}}</div>
+  <div class="col-12 mov-det" *ngIf="movieDetail">
+  <div class="col-xs-6" >
+    <div class="col-xs-4"><img src="{{movieDetail.Poster}}" style='height:150px;width:150px;'/></div>
+    <div class="col-xs-6">
+      <div class="col-xs-12 pad-10">{{movieDetail.Title}}</div>
+      <div class="col-xs-12 pad-10">{{movieDetail.Year}}</div>
+      <div class="col-xs-12 pad-10">{{movieDetail.imdbID}}</div>
+    </div>
+    <div class="col-xs-12" style="top:15px;"><button (click)='backToSearch()'>Back</button></div>
+  </div>
+</div>
+</div>
